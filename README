@@ -14,7 +14,7 @@ Overview:
     branches are usually generated independent of each other often have this
     problem, particularly in complicated outputs. The space colonization
     algorithm also has the advantage of introducing natural-looking irregularity
-    and asymetry into the generated tree. This too can be difficult to achieve
+    and asymmetry into the generated tree. This too can be difficult to achieve
     with other standard algorithms.
 
 Installing PGTP:
@@ -23,7 +23,7 @@ Installing PGTP:
     installing it for your operating system can be found at www.blender.org.
     
     Please note: PGTP uses API features introduced in Blender 2.63 and is
-    incompatable with all earlier versions.
+    incompatible with all earlier versions.
 
     To load PGTP into Blender once it has been installed, first change the
     screen lay-out from "Default" to "Scripting" on the top menu bar. Open the
@@ -37,11 +37,11 @@ Using PGTP:
     In this tool bar you will be presented with a list of parameters, changes
     to which will be visible in real-time in the 3D viewport! The following is
     an overview of what each parameter does. (You can also hover your mouse
-    over the parameter in Blender for a short desciption.)
+    over the parameter in Blender for a short description.)
     
     - Canopy Bound Mesh Name:
         Name of the bound for the ellipsoid that will define the canopy.
-        All calulations using this mesh are done relative to the origin, so
+        All calculations using this mesh are done relative to the origin, so
         in most situations it should be centered on the z-axis, hovering above
         the xy-plane.
     
@@ -57,7 +57,7 @@ Using PGTP:
     
     - Initial Branch Segment Length:
         The length of each branch segment. Smaller gives a nicer tree, but make
-        sure to increase Attraction Poins and Max Iterations to spread through
+        sure to increase Attraction Points and Max Iterations to spread through
         the full canopy.
     
     - Final Branch Segment Length:
@@ -96,14 +96,14 @@ Using PGTP:
     
 Using Custom Bounding Meshes:
     Unfortunately, there is currently a bug in Blender that causes ray_cast to
-    freeze or crash Blender when certain updates are performed. Because ray_cast 
-    is needed to test if a point is within an arbitrary mesh, this means that 
-    when using canopies defined by such meshes, PGTP cannot show a preview in
-    real time. PGTP does, however, still have a way to use custom bounds, 
-    although it requires directly editing the script's code.
+    freeze or crash Blender when certain updates are performed. Because 
+    ray_cast is needed to test if a point is within an arbitrary mesh, this 
+    means that when using canopies defined by such meshes, PGTP cannot show a 
+    preview in real time. PGTP does, however, still have a way to use custom 
+    bounds, although it requires directly editing the script's code.
     
     In the text editor on the left side of the window, staring on line 47, there
-    is a commented out template to specify the data necessary to use a cutom 
+    is a commented out template to specify the data necessary to use a custom 
     mesh. Supply this data and uncomment the code. Then press "Run Script" to 
     load the new settings. In the "Add > Mesh" menu, there will be an additional
     "Add Tree" option (the lowest is always the newest) which will generate your

@@ -1,0 +1,110 @@
+pgtp - a Blender plugin for procedurally generating trees
+
+Overview:
+    PGTP is a procedural tree-mesh generator plugin for Blender that
+    generates trees using the space-colonization algorithm described by
+    Runions, Lane, and Prusinkiewicz in their paper "Modeling Trees with a
+    Space Colonization Algorithm." In brief, a set of points are first generated
+    within a defined bound. A root is then grown upwards towards these
+    points in steps, and the points are removed as the tree comes within a
+    certain distance of them.
+    
+    The advantage of this algorithm over recursion/fractal based algorithms is 
+    that branches are guaranteed not to intersect. Recursive models, in which 
+    branches are usually generated independent of each other often have this
+    problem, particularly in complicated outputs. The space colonization
+    algorithm also has the advantage of introducing natural-looking irregularity
+    and asymetry into the generated tree. This too can be difficult to achieve
+    with other standard algorithms.
+
+Installing PGTP:
+    PGTP is a Blender plugin, thus to use it, you must first install Blender
+    on your computer. The latest version of Blender and instructions for 
+    installing it for your operating system can be found at www.blender.org.
+    
+    Please note: PGTP uses API features introduced in Blender 2.63 and is
+    incompatable with all earlier versions.
+
+    To load PGTP into Blender once it has been installed, first change the
+    screen lay-out from "Default" to "Scripting" on the top menu bar. Open the
+    pgtp script with the text editor that will now be on the right hand side of
+    the screen and click "Run script". You can now run PGTP from the top menu 
+    bar with "Add > Mesh > Add_Tree".
+
+Using PGTP:
+    Once PGTP has been installed, you can access it through the "Add > Mesh"
+    menu. If the left tool bar is not visible, you can toggle it on with "T".
+    In this tool bar you will be presented with a list of parameters, changes
+    to which will be visible in real-time in the 3D viewport! The following is
+    an overview of what each parameter does. (You can also hover your mouse
+    over the parameter in Blender for a short desciption.)
+    
+    - Canopy Bound Mesh Name:
+        Name of the bound for the ellipsoid that will define the canopy.
+        All calulations using this mesh are done relative to the origin, so
+        in most situations it should be centered on the z-axis, hovering above
+        the xy-plane.
+    
+    - Seed:
+        Change to generate a new tree without changing the other parameters.
+    
+    - Attraction Points:
+        The number of attraction points that will be generated in the bounds.
+        Increasing will increase the density of the tree.
+    
+    - Iterations:
+        The number of iterations the growth algorithm. Adds detail and density.
+    
+    - Initial Branch Segment Length:
+        The length of each branch segment. Smaller gives a nicer tree, but make
+        sure to increase Attraction Poins and Max Iterations to spread through
+        the full canopy.
+    
+    - Final Branch Segment Length:
+        The length of the segments at the tips. Lengths of branches between the
+        root and tip are calculated by linear interpolation.        
+    
+    - Influence Radius:
+        The radius at which attraction points attract branches. Make sure this
+        is high enough for the root to reach the lowest points in the canopy.
+    
+    - Kill Radius:
+        The radius at which a branch is close enough to an attraction point for
+        it to be removed. This number should usually be slightly lower than
+        Branch Resolution.
+    
+    - Root Location:
+        Translates the base of the trunk without moving the canopy.
+    
+    - Tip Radius:
+        The radius of the outermost branches. This value will cascade all the
+        way down the tree to determine the radius of the trunk.
+    
+    - Branch Faces:
+        The number of faces in the n-gon that traces the branches. More will
+        give "rounder" branches. (Also useful to decrease the number of polys
+        in a dense tree.)
+    
+    - Align To View:
+        Aligns the tree axis with your view.
+    
+    - Location:
+        Translates the whole tree. Can also be done after generation.
+    
+    - Rotation:
+        Rotates the whole tree. Can also be done after generation.
+    
+Using Custom Bounding Meshes:
+    Unfortunately, there is currently a bug in Blender that causes ray_cast to
+    freeze or crash Blender when certain updates are performed. Because ray_cast 
+    is needed to test if a point is within an arbitrary mesh, this means that 
+    when using canopies defined by such meshes, PGTP cannot show a preview in
+    real time. PGTP does, however, still have a way to use custom bounds, 
+    although it requires directly editing the script's code.
+    
+    In the text editor on the left side of the window, staring on line 47, there
+    is a commented out template to specify the data necessary to use a cutom 
+    mesh. Supply this data and uncomment the code. Then press "Run Script" to 
+    load the new settings. In the "Add > Mesh" menu, there will be an additional
+    "Add Tree" option (the lowest is always the newest) which will generate your
+    custom tree!
